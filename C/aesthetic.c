@@ -1,3 +1,14 @@
+/* ================== aesthetic.c ==================
+ * Author: Brandon Ibbotson
+ * Created: 19/05/16
+ *
+ * A E S T H E T I F Y a string! Simply pass it in
+ * as the first command line argument.
+ *
+ * Currently doesn't support STDIN.
+ * Might enforce capitalisation at a later date.
+ * ================================================= */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
