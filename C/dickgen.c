@@ -1,3 +1,14 @@
+/* ================== dickgen.c ==================
+ * Author: Brandon Ibbotson
+ * Created: 18/05/16
+ *
+ * Generate a bunch of dicks.
+ * 
+ * Arguments:
+ * -n <the number you want to generate>
+ * -l <the length of each one>
+ * =============================================== */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
