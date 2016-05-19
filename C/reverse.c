@@ -1,3 +1,13 @@
+/* ================== reverse.c ==================
+ * Author: Brandon Ibbotson
+ * Created: 18/05/16
+ *
+ * Reverse a string! Simply pass it in as the
+ * first command line argument.
+ *
+ * Currently doesn't support STDIN.
+ * =============================================== */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
