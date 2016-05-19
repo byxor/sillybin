@@ -5,7 +5,10 @@
  * A E S T H E T I F Y a string! Simply pass it in
  * as the first command line argument.
  *
- * Currently doesn't support STDIN.
+ * UPDATE: You can now write your string into STDIN!
+ * Great for things like...
+ * sudo fortune | aesthetic
+ *
  * Might enforce capitalisation at a later date.
  * ================================================= */
 
@@ -15,6 +18,17 @@
 
 #define _STDIN_ 1
 #define _ARGV_ 0
+
+char *readSTDIN()
+{
+	// Allocate 4096 bytes of memory for the input
+	size_t BUFFER_SIZE = 4096;
+	
+	char *original = malloc(BUFFER_SIZE);
+	fgets(original, BUFFER_SIZE, stdin);
+	
+	return original;
+}
 
 char *aesthetify(char *original)
 {
@@ -46,8 +60,9 @@ int main(int argc, char *argv[])
 	
 	printf("%s\n", aesthetic);
 	
-	if(mode == _STDIN_)
+	if (mode==_STDIN_)
 		free(original);
 	free(aesthetic);
 	return 0;
 }
+
