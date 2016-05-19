@@ -32,32 +32,22 @@ char *aesthetify(char *original)
 	return new_string;
 }
 
-int runSTDIN()
-{
-
-}
-
-int runARGV(char *original)
-{
-
-}
-
 int main(int argc, char *argv[])
 {
 
 	short mode = _ARGV_;
-
 	if (argc < 2)
 	{
-		printf("Not enough args. Expecting a string.\n");
-		return 1;
+		mode = _STDIN_;
 	}
 	
-	char *original = argv[1];
+	char *original = (mode == _ARGV_) ? argv[1] : readSTDIN();
 	char *aesthetic = aesthetify(original);
 	
 	printf("%s\n", aesthetic);
 	
+	if(mode == _STDIN_)
+		free(original);
 	free(aesthetic);
 	return 0;
 }
