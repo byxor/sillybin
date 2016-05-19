@@ -120,13 +120,9 @@ void gotoStart(Cuboid *cuboid)
 void drawCuboid(Cuboid *cuboid)
 {
 	drawTopFace(cuboid);
-	
 	gotoStart(cuboid);
-	
 	drawFrontFace(cuboid);
-	
 	gotoStart(cuboid);
-	
 	drawSideFace(cuboid);
 }	
 
@@ -134,15 +130,25 @@ int main(int argc, char *argv[])
 {
 	if (argc < 4)
 	{
-		printf("Not enough args. Expecting width, height and depth.\n");
+		printf("Usage: cuboid <width> <height> <depth>\n");
 		return 1;
+	}
+	
+	short w = atoi(argv[1]);
+	short h = atoi(argv[2]);
+	short d = atoi(argv[3]);
+	
+	if (w<2 || h<2 || d<2)
+	{
+		printf("Cuboid is too small.\n");
+		return 0;
 	}
 	
 	// Create a cuboid from provided arguments
 	Cuboid *cuboid = malloc(sizeof(Cuboid));
-	cuboid->width = atoi(argv[1]);
-	cuboid->height = atoi(argv[2]);
-	cuboid->depth = atoi(argv[3]);
+	cuboid->width = w;
+	cuboid->height = h;
+	cuboid->depth = d;
 	
 	drawCuboid(cuboid);
 	
