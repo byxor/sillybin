@@ -2,19 +2,20 @@
  * Author: Brandon Ibbotson
  * Created: 19/05/16
  *
+ * Contributed to by: Cian Ruane
+ *
  * A E S T H E T I F Y a string! Simply pass it in
  * as the first command line argument.
  *
  * UPDATE: You can now write your string into STDIN!
  * Great for things like...
  * sudo fortune | aesthetic
- *
- * Might enforce capitalisation at a later date.
  * ================================================= */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define _STDIN_ 1
 #define _ARGV_ 0
@@ -40,9 +41,9 @@ char *aesthetify(char *original)
 	for (i=1; i<length; i++)
 	{
 		*(new_string+(i-1)*2+1) = ' ';
-		*(new_string+(i-1)*2+2) = *(original+i);
+		*(new_string+(i-1)*2+2) = toupper(*(original+i));
 	}
-	
+
 	return new_string;
 }
 
@@ -65,4 +66,3 @@ int main(int argc, char *argv[])
 	free(aesthetic);
 	return 0;
 }
-
