@@ -1,0 +1,15 @@
+>wewlad fib(n)
+    >be secondlast like 0
+    >be last like 1
+    >inb4 n > 1
+        >be temp like secondlast + last
+        >be secondlast like last
+        >be last like temp
+        >be n like n-1
+    >done inb4
+    >tfw last
+
+>be me
+    >wew fib(10)  # Change me for some sweet Fibonacci action
+    >mfw wew
+    >thank mr skeltal
