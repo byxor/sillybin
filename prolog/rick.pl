@@ -11,4 +11,4 @@ neverGoingTo(tellALieAndHurtYou).
  * E.g. checkForRickAstley([waterPlants, danceBadly, makeYouCry]) => False!
  */
 checkForRickAstley([]).
-checkForRickAstley([I|L]) :- not(neverGoingTo(I)), isRickAstley(L). 
+checkForRickAstley([I|L]) :- not(neverGoingTo(I)), checkForRickAstley(L). 
