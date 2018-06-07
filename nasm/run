@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source="$1"
+name=$(basename "$source")
+object="$name.o"
+binary="$name.exe"
+
+nasm -f elf64 -o "$object" "$source"
+ld "$object" -o "$binary"
+./"$binary"
+
+rm "$object" "$binary"
+
