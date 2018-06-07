@@ -2,9 +2,11 @@ SECTION .data
 text:           db "Hello, World!", 10, 0
 length:         equ $-text
 
+;;; System Call IDs
 sys_write:      equ 1
 sys_exit:       equ 60
 
+;;; File Descriptors
 stdout:         equ 1
 
 SECTION .text
