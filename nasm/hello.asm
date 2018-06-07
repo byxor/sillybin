@@ -1,16 +1,22 @@
-section .data
-        text db "Hello, World!", 10
+SECTION .data
+text:           db "Hello, World!", 10, 0
+length:         equ $-text
 
-section .text
+sys_write:      equ 1
+sys_exit:       equ 60
+
+stdout:         equ 1
+
+SECTION .text
         global _start
 
 _start:
-        mov rax, 1
-        mov rdi, 1
+        mov rax, sys_write
+        mov rdi, stdout
         mov rsi, text
-        mov rdx, 14
+        mov rdx, length
         syscall
 
-        mov rax, 60
+        mov rax, sys_exit
         mov rdi, 0
         syscall
