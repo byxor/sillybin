@@ -13,7 +13,7 @@ sys_write:      equ 1
 sys_read:       equ 0
 sys_exit:       equ 60
 
-;;; Descriptors
+;;; File Descriptors
 stdin:          equ 0
 stdout:         equ 1
 
