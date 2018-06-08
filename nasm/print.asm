@@ -1,4 +1,5 @@
 %include "descriptors.asm"
+%include "system_calls.asm"
 
 
 SECTION .data
@@ -8,11 +9,6 @@ text1:          db "world!", 0
 text2:          db "Ultra Long String... Wow it's still going. Computers have too much memory nowadays.", 0
 
 newline:        db 10
-
-;;; System Call IDs
-sys_write:      equ 1
-sys_read:       equ 0
-sys_exit:       equ 60
 
 
 SECTION .text
@@ -28,7 +24,7 @@ _start:
         mov rax, text2
         call Print
 
-        mov rax, sys_exit
+        mov rax, SYS_EXIT
         mov rdi, 0
         syscall
 
@@ -46,13 +42,13 @@ _SearchForEndOfString:
         cmp cl, 0
         jne _SearchForEndOfString
 
-        mov rax, sys_write
+        mov rax, SYS_WRITE
         mov rdi, STDOUT
         pop rsi
         mov rdx, rbx
         syscall
 
-        mov rax, sys_write
+        mov rax, SYS_WRITE
         mov rdi, STDOUT
         mov rsi, newline
         mov rdx, 1

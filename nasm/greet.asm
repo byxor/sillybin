@@ -1,5 +1,6 @@
 %include "descriptors.asm"
-        
+%include "system_calls.asm"        
+
 
 SECTION .data
         
@@ -10,11 +11,6 @@ greeting:       db "Hello, "
 greetingLength: equ $-greeting
 
 nameLength:     equ 16
-
-;;; System Call IDs
-sys_write:      equ 1
-sys_read:       equ 0
-sys_exit:       equ 60
 
 
 SECTION .bss
@@ -28,18 +24,18 @@ _start:
         call GetName
         call GreetName
 
-        mov rax, sys_exit
+        mov rax, SYS_EXIT
         mov rdi, 0
         syscall
 
 GetName:
-        mov rax, sys_write
+        mov rax, SYS_WRITE
         mov rdi, STDOUT
         mov rsi, question
         mov rdx, questionLength
         syscall
 
-        mov rax, sys_read
+        mov rax, SYS_READ
         mov rdi, STDIN
         mov rsi, name
         mov rdx, nameLength
@@ -48,13 +44,13 @@ GetName:
         ret
        
 GreetName:
-        mov rax, sys_write
+        mov rax, SYS_WRITE
         mov rdi, STDOUT
         mov rsi, greeting
         mov rdx, greetingLength
         syscall
 
-        mov rax, sys_write
+        mov rax, SYS_WRITE
         mov rdi, STDOUT
         mov rsi, name
         mov rdx, nameLength
