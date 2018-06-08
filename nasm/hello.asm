@@ -1,5 +1,5 @@
-%include "descriptors.asm"
-%include "system_calls.asm"
+%include "include/descriptors.asm"
+%include "include/system_calls.asm"
         
 
 SECTION .data
