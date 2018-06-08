@@ -1,3 +1,6 @@
+%include "descriptors.asm"
+        
+
 SECTION .data
 text:           db "Hello, World!", 10, 0
 length:         equ $-text
@@ -6,15 +9,13 @@ length:         equ $-text
 sys_write:      equ 1
 sys_exit:       equ 60
 
-;;; File Descriptors
-stdout:         equ 1
 
 SECTION .text
         global _start
 
 _start:
         mov rax, sys_write
-        mov rdi, stdout
+        mov rdi, STDOUT
         mov rsi, text
         mov rdx, length
         syscall

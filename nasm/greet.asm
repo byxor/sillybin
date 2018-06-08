@@ -1,3 +1,6 @@
+%include "descriptors.asm"
+        
+
 SECTION .data
         
 question:       db "What is your name? "
@@ -12,10 +15,6 @@ nameLength:     equ 16
 sys_write:      equ 1
 sys_read:       equ 0
 sys_exit:       equ 60
-
-;;; File Descriptors
-stdin:          equ 0
-stdout:         equ 1
 
 
 SECTION .bss
@@ -35,13 +34,13 @@ _start:
 
 GetName:
         mov rax, sys_write
-        mov rdi, stdout
+        mov rdi, STDOUT
         mov rsi, question
         mov rdx, questionLength
         syscall
 
         mov rax, sys_read
-        mov rdi, stdin
+        mov rdi, STDIN
         mov rsi, name
         mov rdx, nameLength
         syscall
@@ -50,13 +49,13 @@ GetName:
        
 GreetName:
         mov rax, sys_write
-        mov rdi, stdout
+        mov rdi, STDOUT
         mov rsi, greeting
         mov rdx, greetingLength
         syscall
 
         mov rax, sys_write
-        mov rdi, stdout
+        mov rdi, STDOUT
         mov rsi, name
         mov rdx, nameLength
         syscall

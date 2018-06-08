@@ -1,3 +1,6 @@
+%include "descriptors.asm"
+
+
 SECTION .data
 
 text0:          db "Hello", 0
@@ -11,10 +14,7 @@ sys_write:      equ 1
 sys_read:       equ 0
 sys_exit:       equ 60
 
-;;; File Descriptors
-stdin:          equ 0
-stdout:         equ 1
-        
+
 SECTION .text
         global _start
 
@@ -47,13 +47,13 @@ _SearchForEndOfString:
         jne _SearchForEndOfString
 
         mov rax, sys_write
-        mov rdi, stdout
+        mov rdi, STDOUT
         pop rsi
         mov rdx, rbx
         syscall
 
         mov rax, sys_write
-        mov rdi, stdout
+        mov rdi, STDOUT
         mov rsi, newline
         mov rdx, 1
         syscall
