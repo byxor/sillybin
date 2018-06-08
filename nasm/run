@@ -5,9 +5,14 @@ name=$(basename "$source")
 object="$name.o"
 binary="$name.exe"
 
+function _clean_up {
+    rm "$object" "$binary"
+}
+
+set -e
+trap _clean_up EXIT
+
 nasm -f elf64 -o "$object" "$source"
 ld "$object" -o "$binary"
 ./"$binary"
-
-rm "$object" "$binary"
 
