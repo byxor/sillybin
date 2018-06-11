@@ -18,9 +18,9 @@ SECTION .bss
 
 
 SECTION .text
-        global _start
+        global main
 
-_start:
+main:
         call GetName
         call GreetName
 
