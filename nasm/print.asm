@@ -12,9 +12,9 @@ newline:        db 10
 
 
 SECTION .text
-        global _start
+        global main
 
-_start:
+main:
         mov rax, text0
         call Print
 
