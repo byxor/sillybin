@@ -8,9 +8,9 @@ length:         equ $-text
 
 
 SECTION .text
-        global _start
+        global main
 
-_start:
+main:
         mov rax, SYS_WRITE
         mov rdi, STDOUT
         mov rsi, text
