@@ -13,6 +13,6 @@ set -e
 trap _clean_up EXIT
 
 nasm -f elf64 -o "$object" "$source"
-ld "$object" -o "$binary"
+gcc -o "$binary" "$object"
 ./"$binary"
 
