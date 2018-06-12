@@ -1,17 +1,18 @@
 #!/bin/bash
 
 source="$1"
-name=$(basename "$source")
+name=$(basename "$source" ".asm")
 object="$name.o"
 binary="$name.exe"
 
 function _clean_up {
-    rm "$object" "$binary"
+    rm "$object" "$binary" 2>/dev/null
 }
 
 set -e
 trap _clean_up EXIT
 
+_clean_up || :
 nasm -f elf64 -o "$object" "$source"
 gcc -o "$binary" "$object"
 ./"$binary"
