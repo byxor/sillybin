@@ -14,61 +14,86 @@ main:
         mov rbp, rsp
 
         sub rsp, 8
-        mov qword [rbp - 8], BUFFER_SIZE
+        mov qword [rbp - 8], 99
         
-        sub rsp, qword [rbp - 8]
+main_loop:
+        mov rdi, qword [rbp - 8]
+        call printBottleParagraph
 
-        mov rdx, 10
-        mov rsi, qword [rbp - 8]
+        dec qword [rbp - 8]
+
+        cmp qword [rbp - 8], -1
+        jne main_loop
+
+        add rsp, 8
+        mov rax, 0
+        pop rbp
+        ret
+
+
+;; rdi: n
+printBottleParagraph:
+        push rbp
+        mov rbp, rsp
+
+        sub rsp, 16
+        mov qword [rbp - 8], rdi
+        mov qword [rbp - 16], BUFFER_SIZE
+        
+        sub rsp, qword [rbp - 16]
+
+        mov rdx, qword [rbp - 8]
+        mov rsi, qword [rbp - 16]
         mov rdi, rbp
-        sub rdi, qword [rbp - 8]
+        sub rdi, qword [rbp - 16]
         call bottlesOnTheWall
 
-        mov rsi, qword [rbp - 8]
+        mov rsi, qword [rbp - 16]
         mov rdi, rbp
-        sub rdi, qword [rbp - 8]
+        sub rdi, qword [rbp - 16]
         mov al, 0
         call printf
 
         call newLine
 
-        mov rdx, 10
-        mov rsi, qword [rbp - 8]
+        mov rdx, qword [rbp -8]
+        mov rsi, qword [rbp - 16]
         mov rdi, rbp
-        sub rdi, qword [rbp - 8]
+        sub rdi, qword [rbp - 16]
         call bottles
 
-        mov rsi, qword [rbp - 8]
+        mov rsi, qword [rbp - 16]
         mov rdi, rbp
-        sub rdi, qword [rbp - 8]
+        sub rdi, qword [rbp - 16]
         mov al, 0
         call printf
 
         call newLine
 
         mov rdx, 10
-        mov rsi, qword [rbp - 8]
+        mov rsi, qword [rbp - 16]
         mov rdi, rbp
-        sub rdi, qword [rbp - 8]
+        sub rdi, qword [rbp - 16]
         call instruction
 
-        mov rsi, qword [rbp - 8]
+        mov rsi, qword [rbp - 16]
         mov rdi, rbp
-        sub rdi, qword [rbp - 8]
+        sub rdi, qword [rbp - 16]
         mov al, 0
         call printf
 
         call newLine
 
-        mov rdx, 9
-        mov rsi, qword [rbp - 8]
+        mov rdx, qword [rbp - 8]
+        dec rdx
+        mov rsi, qword [rbp - 16]
         mov rdi, rbp
-        sub rdi, qword [rbp - 8]
+        sub rdi, qword [rbp - 16]
         call bottlesOnTheWall
 
-        mov rsi, qword [rbp - 8]
+        mov rsi, qword [rbp - 16]
         mov rdi, rbp
-        sub rdi, qword [rbp - 8]
+        sub rdi, qword [rbp - 16]
         mov al, 0
         call printf
 
@@ -76,10 +101,9 @@ main:
 
         call newLine
         
-        add rsp, qword [rbp - 8]
-        add rsp, 8
+        add rsp, qword [rbp - 16]
+        add rsp, 16
 
-        mov rax, 0
         pop rbp
         ret
 
