@@ -153,9 +153,10 @@ bottlesOnTheWall:
 ;; rsi: size_t
 ;; rdi: char* buffer
 section .rodata
-bottles_pluralFormat    db "%u bottles of beer", 0
-bottles_singularFormat  db "%u bottle of beer", 0
-bottles_noneFormat      db "No more bottles of beer", 0
+bottles_substance       db "conke", 0
+bottles_pluralFormat    db "%u bottles of %s", 0
+bottles_singularFormat  db "%u bottle of %s", 0
+bottles_noneFormat      db "No more bottles of %s", 0
 section .text
 bottles:
         push rbp
@@ -173,17 +174,20 @@ bottles:
         jl bottles_none
 
 bottles_onlyOne:
+        mov rcx, [rbp - 24]
         mov rax, bottles_singularFormat
         jmp bottles_continue
 bottles_moreThanOne:
+        mov rcx, [rbp - 24]
         mov rax, bottles_pluralFormat
         jmp bottles_continue
 bottles_none:
+        mov rcx, bottles_substance
         mov rax, bottles_noneFormat
         jmp bottles_continue
 
 bottles_continue:
-        mov rcx, [rbp - 24]
+        mov r8, bottles_substance
         mov rdx, rax
         mov rsi, [rbp - 16]
         mov rdi, [rbp - 8]
