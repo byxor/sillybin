@@ -44,6 +44,38 @@ main:
         mov al, 0
         call printf
 
+        call newLine
+
+        mov rdx, 10
+        mov rsi, qword [rbp - 8]
+        mov rdi, rbp
+        sub rdi, qword [rbp - 8]
+        call instruction
+
+        mov rsi, qword [rbp - 8]
+        mov rdi, rbp
+        sub rdi, qword [rbp - 8]
+        mov al, 0
+        call printf
+
+        call newLine
+
+        mov rdx, 9
+        mov rsi, qword [rbp - 8]
+        mov rdi, rbp
+        sub rdi, qword [rbp - 8]
+        call bottlesOnTheWall
+
+        mov rsi, qword [rbp - 8]
+        mov rdi, rbp
+        sub rdi, qword [rbp - 8]
+        mov al, 0
+        call printf
+
+        call newLine
+
+        call newLine
+        
         add rsp, qword [rbp - 8]
         add rsp, 8
 
@@ -140,8 +172,35 @@ bottles_continue:
         ret
 
 
+;; rdx: n
+;; rsi: size_t
+;; rdi: char* buffer
+section .rodata
+instruction_takeDown    db "Take one down and pass it around", 0
 section .text
+instruction:
+        push rbp
+        mov rbp, rsp
+
+        sub rsp, 24
+        mov [rbp - 8], rdi
+        mov [rbp - 16], rsi
+        mov [rbp - 24], rdx
+
+        mov rdx, instruction_takeDown
+        mov rsi, [rbp - 16]
+        mov rdi, [rbp - 8]
+        mov al, 0
+        call snprintf
+        
+        add rsp, 24
+        pop rbp
+        ret
+        
+
+section .rodata
 newLine_format  db 10, 0
+section .text
 newLine:
         push rbp
         mov rbp, rsp
