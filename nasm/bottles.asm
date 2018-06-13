@@ -40,21 +40,23 @@ printBottleParagraph:
         sub rsp, 16
         mov qword [rbp - 8], rdi
         mov qword [rbp - 16], ARBITRARY_BUFFER_SIZE
-        
         sub rsp, qword [rbp - 16]
 
+%macro  printBuffer 0
+        mov rsi, qword [rbp - 16]
+        mov rdi, rbp
+        sub rdi, qword [rbp - 16]
+        mov al, 0
+        call printf
+%endmacro
+        
         mov rdx, qword [rbp - 8]
         mov rsi, qword [rbp - 16]
         mov rdi, rbp
         sub rdi, qword [rbp - 16]
         call bottlesOnTheWall
 
-        mov rsi, qword [rbp - 16]
-        mov rdi, rbp
-        sub rdi, qword [rbp - 16]
-        mov al, 0
-        call printf
-
+        printBuffer
         call newLine
 
         mov rdx, qword [rbp - 8]
@@ -63,12 +65,7 @@ printBottleParagraph:
         sub rdi, qword [rbp - 16]
         call bottles
 
-        mov rsi, qword [rbp - 16]
-        mov rdi, rbp
-        sub rdi, qword [rbp - 16]
-        mov al, 0
-        call printf
-
+        printBuffer
         call newLine
 
         mov rdx, qword [rbp - 8]
@@ -77,12 +74,7 @@ printBottleParagraph:
         sub rdi, qword [rbp - 16]
         call instruction
 
-        mov rsi, qword [rbp - 16]
-        mov rdi, rbp
-        sub rdi, qword [rbp - 16]
-        mov al, 0
-        call printf
-
+        printBuffer
         call newLine
 
         cmp qword [rbp - 8], 0
@@ -103,12 +95,7 @@ printBottleParagraph_continue:
         sub rdi, qword [rbp - 16]
         call bottlesOnTheWall
 
-        mov rsi, qword [rbp - 16]
-        mov rdi, rbp
-        sub rdi, qword [rbp - 16]
-        mov al, 0
-        call printf
-
+        printBuffer
         call newLine
 
         cmp qword [rbp - 8], 0
