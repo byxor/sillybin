@@ -2,8 +2,9 @@ extern printf
 extern snprintf
 
 
-BUFFER_SIZE     equ 64
-
+ARBITRARY_BUFFER_SIZE   equ 64
+STARTING_VALUE          equ 99
+        
 
 section .text
         global main
@@ -14,7 +15,7 @@ main:
         mov rbp, rsp
 
         sub rsp, 8
-        mov qword [rbp - 8], 99
+        mov qword [rbp - 8], STARTING_VALUE
         
 main_loop:
         mov rdi, qword [rbp - 8]
@@ -38,7 +39,7 @@ printBottleParagraph:
 
         sub rsp, 16
         mov qword [rbp - 8], rdi
-        mov qword [rbp - 16], BUFFER_SIZE
+        mov qword [rbp - 16], ARBITRARY_BUFFER_SIZE
         
         sub rsp, qword [rbp - 16]
 
@@ -89,7 +90,7 @@ printBottleParagraph:
         jmp printBottleParagraph_moreThanOne
 
 printBottleParagraph_noneLeft:
-        mov rdx, 99
+        mov rdx, STARTING_VALUE
         jmp printBottleParagraph_continue
 printBottleParagraph_moreThanOne:
         mov rdx, qword [rbp - 8]
@@ -140,7 +141,7 @@ bottlesOnTheWall:
         mov [rbp - 24], rdx
 
         sub rsp, 8
-        mov qword [rbp - 24 - 8], BUFFER_SIZE
+        mov qword [rbp - 24 - 8], ARBITRARY_BUFFER_SIZE
 
         sub rsp, qword [rbp - 24 - 8]
         
