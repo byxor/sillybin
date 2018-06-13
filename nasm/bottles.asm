@@ -55,7 +55,6 @@ printBottleParagraph:
         mov rdi, rbp
         sub rdi, qword [rbp - 16]
         call bottlesOnTheWall
-
         printBuffer
         call newLine
 
@@ -64,7 +63,6 @@ printBottleParagraph:
         mov rdi, rbp
         sub rdi, qword [rbp - 16]
         call bottles
-
         printBuffer
         call newLine
 
@@ -73,7 +71,6 @@ printBottleParagraph:
         mov rdi, rbp
         sub rdi, qword [rbp - 16]
         call instruction
-
         printBuffer
         call newLine
 
@@ -94,7 +91,6 @@ printBottleParagraph_continue:
         mov rdi, rbp
         sub rdi, qword [rbp - 16]
         call bottlesOnTheWall
-
         printBuffer
         call newLine
 
@@ -104,7 +100,6 @@ printBottleParagraph_continue:
         call newLine
 
 printBottleParagraph_done:
-
         add rsp, qword [rbp - 16]
         add rsp, 16
 
