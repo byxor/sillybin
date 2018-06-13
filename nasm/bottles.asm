@@ -84,8 +84,19 @@ printBottleParagraph:
 
         call newLine
 
+        cmp qword [rbp - 8], 0
+        je printBottleParagraph_noneLeft
+        jmp printBottleParagraph_moreThanOne
+
+printBottleParagraph_noneLeft:
+        mov rdx, 99
+        jmp printBottleParagraph_continue
+printBottleParagraph_moreThanOne:
         mov rdx, qword [rbp - 8]
         dec rdx
+        jmp printBottleParagraph_continue
+        
+printBottleParagraph_continue:  
         mov rsi, qword [rbp - 16]
         mov rdi, rbp
         sub rdi, qword [rbp - 16]
