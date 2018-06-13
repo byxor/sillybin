@@ -110,8 +110,13 @@ printBottleParagraph_continue:
 
         call newLine
 
+        cmp qword [rbp - 8], 0
+        je printBottleParagraph_done
+
         call newLine
-        
+
+printBottleParagraph_done:
+
         add rsp, qword [rbp - 16]
         add rsp, 16
 
