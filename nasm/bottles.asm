@@ -56,7 +56,7 @@ printBottleParagraph:
 
         call newLine
 
-        mov rdx, qword [rbp -8]
+        mov rdx, qword [rbp - 8]
         mov rsi, qword [rbp - 16]
         mov rdi, rbp
         sub rdi, qword [rbp - 16]
@@ -70,7 +70,7 @@ printBottleParagraph:
 
         call newLine
 
-        mov rdx, 10
+        mov rdx, qword [rbp - 8]
         mov rsi, qword [rbp - 16]
         mov rdi, rbp
         sub rdi, qword [rbp - 16]
@@ -201,6 +201,7 @@ bottles_continue:
 ;; rdi: char* buffer
 section .rodata
 instruction_takeDown    db "Take one down and pass it around", 0
+instruction_buyMore     db "Go to the store and buy some more", 0
 section .text
 instruction:
         push rbp
@@ -211,7 +212,18 @@ instruction:
         mov [rbp - 16], rsi
         mov [rbp - 24], rdx
 
+        cmp qword [rbp - 24], 0
+        je instruction_noneLeft
+        jmp instruction_oneOrMore
+        
+instruction_oneOrMore:
         mov rdx, instruction_takeDown
+        jmp instruction_continue
+instruction_noneLeft:
+        mov rdx, instruction_buyMore
+        jmp instruction_continue
+        
+instruction_continue:
         mov rsi, [rbp - 16]
         mov rdi, [rbp - 8]
         mov al, 0
