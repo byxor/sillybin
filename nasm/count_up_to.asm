@@ -13,7 +13,7 @@ SECTION .text
 
 main:
         push rbp
-        mov ebp, esp
+        mov rbp, rsp
 
         call getNumber
 
