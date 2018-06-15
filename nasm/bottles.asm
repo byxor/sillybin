@@ -153,7 +153,7 @@ bottlesOnTheWall:
 ;; rsi: size_t
 ;; rdi: char* buffer
 section .rodata
-bottles_substance       db "conke", 0
+bottles_substance       db "beer", 0
 bottles_pluralFormat    db "%u bottles of %s", 0
 bottles_singularFormat  db "%u bottle of %s", 0
 bottles_noneFormat      db "No more bottles of %s", 0
