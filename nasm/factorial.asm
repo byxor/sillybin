@@ -14,7 +14,7 @@ main:
         mov rbp, rsp
         sub rsp, 16
         mov qword [rbp - 8], 0          ; n
-        mov qword [rbp - 16], 15        ; upperLimit
+        mov qword [rbp - 16], 60        ; upperLimit
 
 main_loop:
         mov rdi, qword [rbp - 8]
