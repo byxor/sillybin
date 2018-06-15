@@ -2,7 +2,7 @@ extern printf
 
 
 section .rodata
-outputFormat    db "%-5d factorial is %d", 10, 0
+outputFormat    db "%-5lu factorial is %lu", 10, 0
 
 
 section .text
@@ -14,7 +14,7 @@ main:
         mov rbp, rsp
         sub rsp, 16
         mov qword [rbp - 8], 0          ; n
-        mov qword [rbp - 16], 60        ; upperLimit
+        mov qword [rbp - 16], 20        ; upperLimit
 
 main_loop:
         mov rdi, qword [rbp - 8]
