@@ -2,7 +2,7 @@ extern printf
 
 
 section .rodata
-outputFormat    db "%-5lu factorial is %lu", 10, 0
+outputFormat    db "%-2lu factorial is %lu", 10, 0
 
 
 section .text
@@ -31,7 +31,7 @@ main_loop:
         mov rax, qword [rbp - 8]
         mov rbx, qword [rbp - 16]
         cmp rax, rbx
-        jl main_loop
+        jle main_loop
 
         mov rax, 0
         add rsp, 16
