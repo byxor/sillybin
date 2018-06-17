@@ -15,6 +15,9 @@ main:
         mov rdi, callback1
         call invokePolymorphically
 
+        mov rdi, callback2
+        call invokePolymorphically
+
         mov rax, 0
         pop rbp
         ret
@@ -48,7 +51,7 @@ invokePolymorphically:
 
 
 section .rodata
-        callback0_message       db "Callback 0", 10, 0
+        callback0_message       db "Executing Callback 0", 10, 0
 section .text
 callback0:
         push rbp
@@ -70,6 +73,21 @@ callback1:
         mov rbp, rsp
 
         mov rdi, callback1_message
+        mov al, 0
+        call printf
+
+        pop rbp
+        ret
+
+
+section .rodata
+        callback2_message       db "Deleting C:\WINDOWS\System32... done!", 10, 0
+section .text
+callback2:
+        push rbp
+        mov rbp, rsp
+
+        mov rdi, callback2_message
         mov al, 0
         call printf
 
