@@ -1,7 +1,5 @@
 extern printf
 
-%define struct(attribute, size, rbpOffset) [rbp - rbpOffset - size + attribute]
-
 
 section .rodata
 
