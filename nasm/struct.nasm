@@ -8,12 +8,9 @@ endstruc
 
 
 section .rodata
-description     db "Point:", 10, 0
-integerFormat   db "%d", 10, 0
-point istruc Point
-        at Point.x, dq 10
-        at Point.y, dq 20
-iend
+description     db "Point: ", 0
+integerFormat   db "%d ", 0
+newLine         db 10, 0
 
 
 section .text
@@ -21,20 +18,29 @@ section .text
 main:
         push rbp
         mov rbp, rsp
+        sub rsp, 16
 
         mov rdi, description
         mov al, 0
         call printf
 
-        mov rsi, qword [point + Point.x]
+        mov [ebp - 16], 10
+
+        ;; mov rsi, qword [ebp - 16 + Point.x]
+        mov rsi, qword [ebp - 16]
         mov rdi, integerFormat
         mov al, 0
         call printf
 
-        mov rsi, qword [point + Point.y]
-        mov rdi, integerFormat
+        ;; mov rsi, qword [ebp - 16 + Point.y]
+        ;; mov rdi, integerFormat
+        ;; mov al, 0
+        ;; call printf
+
+        mov rdi, newLine
         mov al, 0
         call printf
 
+        add rsp, 16
         pop rbp
         ret
