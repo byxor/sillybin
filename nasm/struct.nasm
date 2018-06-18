@@ -7,7 +7,7 @@ struc Point
   .x    resq 1
   .y    resq 1
 endstruc
-Point.SIZE      equ 24
+Point.SIZE      equ 16
 Point.FORMAT    db "<Point: x=%ld y=%ld>", 10, 0
 
 
