@@ -5,15 +5,12 @@ extern printf
 
 section .rodata
 
-description     db "Point: ", 0
-integerFormat   db "%d ", 0
-newLine         db 10, 0
-
 struc Point
   .x    resq 1
   .y    resq 1
 endstruc
-Point.SIZE equ 24
+Point.SIZE      equ 24
+Point.FORMAT    db "<Point: x=%ld y=%ld>", 10, 0
 
 
 section .text
@@ -26,26 +23,9 @@ main:
         mov qword [rbp - Point.SIZE + Point.x], 10
         mov qword [rbp - Point.SIZE + Point.y], 20
 
-        mov rdi, description
-        mov al, 0
-        call printf
-
+        mov rdx, qword [rbp - Point.SIZE + Point.y]
         mov rsi, qword [rbp - Point.SIZE + Point.x]
-        mov rdi, integerFormat
-        mov al, 0
-        call printf
-
-        mov rsi, qword [rbp - Point.SIZE + Point.y]
-        mov rdi, integerFormat
-        mov al, 0
-        call printf
-
-        mov rsi, Point.SIZE
-        mov rdi, integerFormat
-        mov al, 0
-        call printf
-
-        mov rdi, newLine
+        mov rdi, Point.FORMAT
         mov al, 0
         call printf
 
