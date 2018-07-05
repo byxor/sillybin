@@ -21,7 +21,11 @@ func main() {
 		go startProgressBar(&wg, messages, id, steps)
 	}
 
-	go printMessages(messages)
+	go func() {
+		for message := range messages {
+			fmt.Println(message)
+		}
+	}()
 
 	wg.Wait()
 
@@ -48,10 +52,4 @@ func progressBarGraphic(id int, n int, steps int) string {
 		id,
 		strings.Repeat("#", n),
 		strings.Repeat("-", steps-n-1))
-}
-
-func printMessages(messages chan string) {
-	for message := range messages {
-		fmt.Println(message)
-	}
 }
