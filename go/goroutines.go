@@ -17,23 +17,30 @@ func main() {
 		go startProgressBar(id, responses, steps)
 	}
 
-	times(progressBars*steps, func() {
+	for i := 0; i < progressBars*steps; i++ {
 		fmt.Println(<-responses)
-	})
+	}
 
 	fmt.Println("All progress bars have finished!")
 }
 
 func startProgressBar(id int, responses chan string, steps int) {
 	for n := 0; n < steps; n++ {
-		time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
-		progressBar := strings.Repeat("#", n) + strings.Repeat("-", steps-n-1)
-		responses <- fmt.Sprintf("Progress Bar #%d: %s", id, progressBar)
+		sleepForRandomDuration()
+		responses <- progressBarGraphic(id, n, steps)
 	}
 }
 
-func times(n int, f func()) {
-	for i := 0; i < n; i++ {
-		f()
-	}
+func sleepForRandomDuration() {
+	random := rand.Intn(1000)
+	duration := time.Duration(random) * time.Millisecond
+	time.Sleep(duration)
+}
+
+func progressBarGraphic(id int, n int, steps int) string {
+	return fmt.Sprintf(
+		"Progress Bar #%d: %s%s",
+		id,
+		strings.Repeat("#", n),
+		strings.Repeat("-", steps-n-1))
 }
