@@ -34,11 +34,8 @@ func sort(numbers []int64) {
 	for numOfSorted < length {
 		i := 0
 		for i < length-numOfSorted-1 {
-			a := numbers[i]
-			b := numbers[i+1]
-			if a > b {
-				numbers[i] = b
-				numbers[i+1] = a
+			if numbers[i] > numbers[i+1] {
+				numbers[i], numbers[i+1] = numbers[i+1], numbers[i]
 			}
 			i++
 		}
