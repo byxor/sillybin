@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	adapters := []adapter{makeAngry, makeExcited, makeVape}
+	adapters := []adapter{makeAngry(5), makeAngry(10), makeVape}
 	for _, a := range adapters {
 		adapt(a, "Hello")
 	}
@@ -22,12 +22,10 @@ func adapt(a adapter, s string) {
 
 // --- Concrete ---
 
-func makeAngry(s string) string {
-	return strings.ToUpper(s) + "11!"
-}
-
-func makeExcited(s string) string {
-	return s + "!"
+func makeAngry(exclamations int) adapter {
+	return func(s string) string {
+		return strings.ToUpper(s) + strings.Repeat("!", exclamations)
+	}
 }
 
 func makeVape(s string) (output string) {
