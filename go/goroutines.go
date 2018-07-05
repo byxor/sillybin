@@ -8,26 +8,26 @@ import (
 )
 
 func main() {
-	const routines = 9
-	const limit = 15
+	const progressBars = 9
+	const steps = 15
 
 	responses := make(chan string)
 
-	for id := 1; id <= routines; id++ {
-		go startProgressBar(id, responses, limit)
+	for id := 1; id <= progressBars; id++ {
+		go startProgressBar(id, responses, steps)
 	}
 
-	times(routines*limit, func() {
+	times(progressBars*steps, func() {
 		fmt.Println(<-responses)
 	})
 
 	fmt.Println("All progress bars have finished!")
 }
 
-func startProgressBar(id int, responses chan string, limit int) {
-	for n := 0; n < limit; n++ {
+func startProgressBar(id int, responses chan string, steps int) {
+	for n := 0; n < steps; n++ {
 		time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
-		progressBar := strings.Repeat("#", n) + strings.Repeat("-", limit-n-1)
+		progressBar := strings.Repeat("#", n) + strings.Repeat("-", steps-n-1)
 		responses <- fmt.Sprintf("Progress Bar #%d: %s", id, progressBar)
 	}
 }
