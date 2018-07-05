@@ -1,0 +1,16 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	
+}
+
+// --- Abstract ---
+
+type adacter interface {
+	func adapt(s string) string
+}

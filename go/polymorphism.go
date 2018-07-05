@@ -14,7 +14,7 @@ func main() {
 
 // --- Abstract ---
 
-type adapter func(s string) string
+type adapter func(string) string
 
 func adapt(a adapter, s string) {
 	fmt.Println(a(s))
@@ -30,10 +30,9 @@ func makeExcited(s string) string {
 	return s + "!"
 }
 
-func makeVape(s string) string {
-	output := ""
+func makeVape(s string) (output string) {
 	for _, r := range []rune(s) {
 		output += string(r) + " "
 	}
-	return output
+	return
 }
