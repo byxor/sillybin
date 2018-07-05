@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -11,24 +12,32 @@ func main() {
 	const progressBars = 9
 	const steps = 15
 
-	responses := make(chan string)
+	messages := make(chan string)
+	done := make(chan bool)
 
 	for id := 1; id <= progressBars; id++ {
-		go startProgressBar(id, responses, steps)
+		go startProgressBar(done, messages, id, steps)
 	}
 
-	for i := 0; i < progressBars*steps; i++ {
-		fmt.Println(<-responses)
+	go func() {
+		for message := range messages {
+			fmt.Println(message)
+		}
+	}()
+
+	for i := 0; i < routines; i++ {
+		<-done
 	}
 
 	fmt.Println("All progress bars have finished!")
 }
 
-func startProgressBar(id int, responses chan string, steps int) {
+func startProgressBar(done chan bool, messages chan string, id int, steps int) {
 	for n := 0; n < steps; n++ {
 		sleepForRandomDuration()
-		responses <- progressBarGraphic(id, n, steps)
+		messages <- progressBarGraphic(id, n, steps)
 	}
+	done <- true
 }
 
 func sleepForRandomDuration() {
