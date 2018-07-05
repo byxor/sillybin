@@ -12,32 +12,28 @@ func main() {
 	const progressBars = 9
 	const steps = 15
 
+	var wg sync.WaitGroup
+	wg.Add(progressBars)
+
 	messages := make(chan string)
-	done := make(chan bool)
 
 	for id := 1; id <= progressBars; id++ {
-		go startProgressBar(done, messages, id, steps)
+		go startProgressBar(&wg, messages, id, steps)
 	}
 
-	go func() {
-		for message := range messages {
-			fmt.Println(message)
-		}
-	}()
+	go printMessages(messages)
 
-	for i := 0; i < routines; i++ {
-		<-done
-	}
+	wg.Wait()
 
 	fmt.Println("All progress bars have finished!")
 }
 
-func startProgressBar(done chan bool, messages chan string, id int, steps int) {
+func startProgressBar(wg *sync.WaitGroup, messages chan string, id int, steps int) {
+	defer wg.Done()
 	for n := 0; n < steps; n++ {
 		sleepForRandomDuration()
 		messages <- progressBarGraphic(id, n, steps)
 	}
-	done <- true
 }
 
 func sleepForRandomDuration() {
@@ -52,4 +48,10 @@ func progressBarGraphic(id int, n int, steps int) string {
 		id,
 		strings.Repeat("#", n),
 		strings.Repeat("-", steps-n-1))
+}
+
+func printMessages(messages chan string) {
+	for message := range messages {
+		fmt.Println(message)
+	}
 }
