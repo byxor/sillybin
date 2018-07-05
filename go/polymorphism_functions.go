@@ -14,7 +14,7 @@ func main() {
 
 // --- Abstract ---
 
-type adapter func(string) string
+type adapter func(s string) string
 
 func adapt(a adapter, s string) {
 	fmt.Println(a(s))
