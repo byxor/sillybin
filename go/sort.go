@@ -9,11 +9,7 @@ import (
 )
 
 func main() {
-	numbers := getNumbers()
-
-	sort(numbers)
-
-	fmt.Println(numbers)
+	fmt.Println(sort(getNumbers()))
 }
 
 func getNumbers() []int64 {
