@@ -1,0 +1,17 @@
+#!/bin/bash
+
+OUTPUT_DIRECTORY=out
+
+mkdir -p $OUTPUT_DIRECTORY
+
+INPUT_FILE=$1
+ELF_FILE=$OUTPUT_DIRECTORY/$INPUT_FILE.elf
+GBA_FILE=$OUTPUT_DIRECTORY/$INPUT_FILE.gba
+
+echo "Building $GBA_FILE..."
+
+gcc -o $ELF_FILE $INPUT_FILE -lm
+objcopy -O binary $ELF_FILE $GBA_FILE
+rm $ELF_FILE
+
+echo "Done."
