@@ -25,19 +25,27 @@ def simulate(starting_money, interest, years, reinvest):
 
 ####################################################
 
-currency = "£"
-starting_money = 3600
-starting_age = 20
-ending_age = 60
-age_interval = 5
-interest = 2.5
+import sys
+
+try:
+    currency = "£"
+    starting_money = float(sys.argv[2])
+    starting_age = 20
+    ending_age = 60
+    age_interval = 4
+    interest = float(sys.argv[1])
+except IndexError:
+    print("Please supply command-line args for: <% interest> <investment>")
+    print()
+    print("$ python3.6 compound_interest.py 10 300")
+    print()
+    sys.exit(1)
 
 
 def main():
     print()
-    print(f"Investing Until:     {ending_age} years old") 
-    print(f"Initial Investment:  {cash(starting_money)}")
     print(f"Interest:            {interest}%")
+    print(f"Initial Investment:  {cash(starting_money)}")
 
     run_simulation(False)
     run_simulation(True)
