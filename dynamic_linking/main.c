@@ -18,11 +18,11 @@ int main() {
   enterr(__FUNCTION__);
 
   int a, b;
-  cout("Enter 2 numbers (space separated): ");
+  cout("Enter 2 integers (space separated): ");
   scanf("%d %d", &a, &b);
 
   int answer = sum(a, b);
-  cout("Answer is: %d\n", answer);
+  cout("Their sum is: %d\n", answer);
 
   exitt(__FUNCTION__);
   return 0;
