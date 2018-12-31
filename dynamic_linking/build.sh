@@ -9,6 +9,6 @@ gcc -shared -o sum_good/libsum.so sum_good/sum.o
 gcc -shared -o sum_bad/libsum.so sum_bad/sum.o
 
 echo "Building main program..."
-gcc -L ./sum_bad -L ./sum_good -Wall -o main.exe main.c -lsum
+gcc -L ./sum_bad -L ./sum_good -Wall -Wno-format-security -o main.exe main.c -lsum
 
 echo "done."

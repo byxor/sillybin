@@ -1,6 +1,9 @@
 #!/bin/bash
 
-./build.sh
+set -e
+trap 'echo "Error ^^^"' ERR
+
+source build.sh
 echo
 echo
 
