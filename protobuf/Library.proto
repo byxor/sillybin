@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+// package library;
+// option java_package = "com.example.tutorial";
+
+option java_outer_classname = "LibraryProtos";
+
+message Book {
+  string title = 1;
+  string author = 2;
+}
+
+message SearchRequest {
+  string text = 1;
+}
+
+message SearchResponse {
+  Book book = 1;
+}
+
+service SearchService {
+  rpc Search (SearchRequest) returns (SearchResponse);
+}
