@@ -22,15 +22,14 @@ function main() {
       grpc.credentials.createInsecure()
   );
 
-  var user = 'Bob';
-
   client.search(
       {text: 'the bible'},
       function(err, response) {
           if (!!err) {
               console.log('Err:', err);
           } else {
-              console.log('Book:', response.title, response.author);
+              console.log(response);
+              console.log('Book:', response.book);
           }
       }
   );

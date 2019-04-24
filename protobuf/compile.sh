@@ -28,14 +28,14 @@ protoc \
 
 ######################################################################
 
-echo "Compiling to JavaScript..."
+# echo "Compiling to JavaScript..."
 
-rm -rf "$jsOutput"
-mkdir -p "$jsOutput"
+# rm -rf "$jsOutput"
+# mkdir -p "$jsOutput"
 
-protoc \
-  --js_out="$jsOutput" \
-  "$protoFile"
+# protoc \
+#   --js_out="$jsOutput" \
+#   "$protoFile"
 
 ######################################################################
 
