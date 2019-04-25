@@ -13,36 +13,29 @@ const DIRECTIONS = {
 const NUMBER_OF_DIRECTIONS = 4;
 
 function createSnake() {
-    return {
-        direction: RIGHT,
-
-        head: {
-            position: {
-                x: 2,
-                y: 1,
-            },
-        },
-
-        bodyParts: [],
-    };
+    return {direction: RIGHT,
+            head: {position: {x: 2, y: 1}},
+            bodyParts: [{position: {x: 1, y: 1}}]};
 }
 
 function move(snake) {
     const velocity = DIRECTIONS[snake.direction];
 
     const oldHead = snake.head;
-    const newHead = {
-        position: {
-            x: oldHead.position.x + velocity.x,
-            y: oldHead.position.y + velocity.y,
-        },
-    };
+    const newHead = {position: {x: oldHead.position.x + velocity.x,
+                                y: oldHead.position.y + velocity.y}};
 
     const oldTail = snake.bodyParts.shift();
 
     snake.head = newHead;
     snake.bodyParts.push(oldHead);
 
+    return snake;
+}
+
+function grow(snake) {
+    const tail = snake.bodyParts[0];
+    snake.bodyParts.unshift(tail);
     return snake;
 }
 
@@ -78,7 +71,6 @@ function isOffBoard(board, snake) {
 
 function isTouchingItself(snake) {
     for (let bodyPart of snake.bodyParts) {
-        console.log(bodyPart.position, snake.head.position);
         if (isEqual(bodyPart.position, snake.head.position)) {
             return true;
         }
@@ -88,10 +80,4 @@ function isTouchingItself(snake) {
 
 function isTouchingFood(snake, food) {
     return isEqual(snake.head.position, food.position);
-}
-
-function grow(snake) {
-    const tail = snake.bodyParts[0];
-    snake.bodyParts.unshift(tail);
-    return snake;
 }

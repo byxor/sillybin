@@ -1,25 +1,21 @@
-const SQUARE_SIZE = 10;
+const SQUARE_SIZE = 20;
 
-const BOARD = {
-    size: {
-        x: 40,
-        y: 40,
-    },
-};
-
+let board;
 let snake;
 let food;
 
 function resetGame() {
+    board = createBoard();
+    food = createFood(board);
     snake = createSnake();
-    food = createFood(BOARD);
 }
 
 function setup() {
-    createCanvas(400, 400);
-    frameRate(4);
-
     resetGame();
+
+    createCanvas(board.size.x * SQUARE_SIZE,
+                 board.size.y * SQUARE_SIZE);
+    frameRate(4);
 }
 
 function draw() {
@@ -31,15 +27,16 @@ function draw() {
 }
 
 function tick() {
+    console.log(snake);
+
     snake = move(snake);
 
     if (isTouchingFood(snake, food)) {
-        console.log("got food");
         snake = grow(snake);
-        food = createFood(BOARD);
+        food = createFood(board);
     }
 
-    if (isOffBoard(BOARD, snake)) {
+    if (isOffBoard(board, snake)) {
         resetGame();
         return;
     }
